@@ -189,3 +189,7 @@ func (s *Store[T]) AliveIndexes() []int {
 	defer s.RUnlock()
 	return s.aliveIndexes
 }
+
+func (s *Store[T]) Size() int {
+	return len(s.data)
+}

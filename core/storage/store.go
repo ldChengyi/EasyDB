@@ -137,6 +137,14 @@ func (s *Store[T]) List(ctx context.Context, offset, limit int) ([]*types.Record
 	s.RLock()
 	defer s.RUnlock()
 
+	if offset < 0 {
+		offset = 0
+	}
+
+	if limit < 0 {
+		limit = 0
+	}
+
 	total := len(s.aliveIndexes)
 	if offset >= total {
 		return []*types.Record[T]{}, total, nil
